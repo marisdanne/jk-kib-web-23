@@ -1,0 +1,17 @@
+{% extends "layout.html" %}
+
+{% block saturs %}
+    <h1>Lūdzu aizpildi pieteikšanās formu!</h1>
+    <form method="POST">
+        <fieldset>
+            <label for="vards">Ievadi savu vārdu: 
+                <input id="vards" name="vards" type="text" placeholder="Māris" required />
+            </label>
+            <label for="epasts">Ievadi savu e-pastu:
+                <input id="epasts" name="epasts" type="email" placeholder="maris@maris.lv" required />
+            </label>
+            <input type="submit" value="Iesniegt">
+        </fieldset>
+    </form>
+
+{% endblock %}

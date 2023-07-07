@@ -37,6 +37,17 @@ def parametri(vards = "Nav definēts", cipars = "Nav definēts"):
 
     return render_template('parametri.html', vards = vards, cipars = cipars)
 
+@app.route('/forma', methods=['POST', 'GET'])
+def post():
+    if request.method == 'POST':
+        print("Ir saņemts iesniegums!")
+        vards = request.form.get('vards')
+        epasts = request.form.get('epasts')
+
+        print("Vards:", vards, " Epasts:", epasts)
+
+    return render_template('forma.html')
+
 
 if __name__ == '__main__':
     app.run(debug=True, port=8080)
