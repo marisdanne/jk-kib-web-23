@@ -9,6 +9,7 @@
                 <th>ID</th>
                 <th>Vārds</th>
                 <th>E-pasts</th>
+                <th>Dzēst</th>
             </tr>
         </thead>
         <tbody>
@@ -17,6 +18,7 @@
                 <td>{{ persona.id }}</td>
                 <td>{{ persona.vards }}</td>
                 <td>{{ persona.epasts }}</td>
+                <td><a href="/persona/dzest/{{ persona.id }}">Dzēst</a></td>
             </tr>
             {% endfor %}  
         </tbody>

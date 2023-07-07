@@ -1,5 +1,6 @@
-from flask import Flask, render_template, request, flash
+from flask import Flask, render_template, request, flash, redirect
 from flask_sqlalchemy import SQLAlchemy
+from sqlalchemy import exc
 
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///datubaze.sqlite3'
@@ -60,15 +61,23 @@ def post():
         persona = Persona(vards=vards, epasts=epasts)
 
         db.session.add(persona)
-        db.session.commit()
-
+        try:
+            db.session.commit()
+            flash("Lietotājs ir pievienots", category="veiksmigi")
+        except exc.IntegrityError:
+            flash("Lietotājs ar šādu e-pastu jau eksistē!", category="kluda")
+        except exc.SQLAlchemyError as error:
+            print(error._message)
+            flash("Radās neparedzēta kļūda datubāzē! Mēģiniet vēlāk vai sazinieties ar administrātoru!", category="Kļūda")
+        
     return render_template('forma.html')
 
 @app.route('/datubaze')
 def datubaze():
     personas = Persona.query.all()
-    for persona in personas:
-        print(persona.vards, persona.epasts)
+    # Druka DB saturu konsole
+    # for persona in personas:
+    #     print(persona.vards, persona.epasts)
 
     return render_template('datubaze.html', personas = personas)
 
@@ -85,6 +94,19 @@ def meklet():
             flash("Persona nav atrasta!", category="kluda")
     
     return render_template('meklet.html', epasts = epasts)
+
+@app.route('/persona/dzest/<int:id>')
+def dzest(id):
+    persona = Persona.query.filter_by(id=id).first()
+    if persona:
+        db.session.delete(persona)
+        db.session.commit()
+        flash("Persona ir dzēsta!", category="veiksmigi")
+    else:
+        flash("Persona ar šādu id neeksistē!", category="kluda")
+    return redirect('/datubaze')
+
+
 
 if __name__ == '__main__':
     with app.app_context():
