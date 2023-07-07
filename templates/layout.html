@@ -17,6 +17,7 @@
                 <li><a href="/parametri">Parametri</a></li>
                 <li><a href="/forma">Forma</a></li>
                 <li><a href="/datubaze">Datubaze</a></li>
+                <li><a href="/meklet">Meklēt</a></li>
             </ul>
         </nav>
     </header>
@@ -25,6 +26,15 @@
         {% block saturs %}
         {% endblock %}
     </section>
+
+    {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+            <h3>Paziņojumi:</h3>
+            {% for category, message in messages %}
+                <p class="{% if category == 'kluda' %}kluda{% elif category == 'veiksmigi' %}veiksmigi{% endif %}">{{ message }}</p>
+            {% endfor %}
+        {% endif %}
+    {% endwith%}
 
     <footer>
         Autors: Māris

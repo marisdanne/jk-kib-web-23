@@ -1,9 +1,10 @@
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request, flash
 from flask_sqlalchemy import SQLAlchemy
 
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///datubaze.sqlite3'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+app.config['SECRET_KEY'] = "4t5ryhj45erg454342rwefg45erh"
 
 db = SQLAlchemy(app)
 
@@ -71,6 +72,19 @@ def datubaze():
 
     return render_template('datubaze.html', personas = personas)
 
+@app.route('/meklet')
+def meklet():
+    dati = request.args.to_dict()
+    epasts = ""
+    if 'epasts' in dati:
+        epasts = dati['epasts']
+        persona = Persona.query.filter_by(epasts=epasts).first()
+        if persona:
+            flash("Persona ir atrasta", category="veiksmigi")
+        else:
+            flash("Persona nav atrasta!", category="kluda")
+    
+    return render_template('meklet.html', epasts = epasts)
 
 if __name__ == '__main__':
     with app.app_context():

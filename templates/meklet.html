@@ -1,0 +1,14 @@
+{% extends "layout.html" %}
+
+{% block saturs %}
+    <h1>Pārbaudīt vai datubāzē eksistē e-pasts!</h1>
+    <form method="GET">
+        <fieldset>
+            <label for="epasts">Ievadi meklējamo e-pastu:
+                <input id="epasts" name="epasts" type="email" placeholder="maris@maris.lv" required value="{{ epasts}}"/>
+            </label>
+            <input type="submit" value="Iesniegt">
+        </fieldset>
+    </form>
+
+{% endblock %}

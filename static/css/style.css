@@ -12,3 +12,11 @@ tfoot {
     background-color: #333;
     color: #fff;
 }
+
+.veiksmigi {
+    color: green;
+}
+
+.kluda {
+    color: red;
+}
