@@ -1,0 +1,25 @@
+{% extends "layout.html" %}
+
+{% block saturs %}
+    <h1>Datubāzes Personas saturs</h1>
+
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Vārds</th>
+                <th>E-pasts</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for persona in personas %}
+            <tr>
+                <td>{{ persona.id }}</td>
+                <td>{{ persona.vards }}</td>
+                <td>{{ persona.epasts }}</td>
+            </tr>
+            {% endfor %}  
+        </tbody>
+    </table>
+
+{% endblock %}

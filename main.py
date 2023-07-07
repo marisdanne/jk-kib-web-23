@@ -56,7 +56,20 @@ def post():
 
         print("Vards:", vards, " Epasts:", epasts)
 
+        persona = Persona(vards=vards, epasts=epasts)
+
+        db.session.add(persona)
+        db.session.commit()
+
     return render_template('forma.html')
+
+@app.route('/datubaze')
+def datubaze():
+    personas = Persona.query.all()
+    for persona in personas:
+        print(persona.vards, persona.epasts)
+
+    return render_template('datubaze.html', personas = personas)
 
 
 if __name__ == '__main__':
