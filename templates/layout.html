@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/static/css/style.css">
+    <title>Recepšu grāmata!</title>
+</head>
+<body>
+    <header>
+        <nav>
+            <ul>
+                <li><a href="/">Sākums</a></li>
+                <li><a href="/auksta_zupa">Aktuāli! Aukstā zupa</a></li>
+                <li><a href="/citrona_dzeriens">Citrona dzēriens</a></li>
+                <li><a href="/kontakti">Kontakti</a></li>
+                <li><a href="/parametri">Parametri</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <section>
+        {% block saturs %}
+        {% endblock %}
+    </section>
+
+    <footer>
+        Autors: Māris
+    </footer>
+    
+</body>
+</html>
